@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
   errors,
 }) => {
   return (
-    <div className="w-full relative">
+    <div className="w-full relative gap-4">
       {formatPrice && (
         <FaBrazilianRealSign
           size={24}
