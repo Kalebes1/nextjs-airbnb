@@ -10,6 +10,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import useRegisterModal from "@/app/hooks/useRegisterModel";
 import useLoginModal from "@/app/hooks/useLoginModal";
+
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Input from "../inputs/Input";
@@ -18,7 +19,7 @@ import Button from "../Button";
 import { useRouter } from 'next/navigation';
 
 const LoginModal = () => {
-  const router = useRouter()
+  const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,7 @@ const LoginModal = () => {
   
     signIn('credentials',{
       ...data,
-      redirect: false
+      redirect: false,
     })
     .then((callback) => {
         setIsLoading(false);

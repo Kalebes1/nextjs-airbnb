@@ -2,9 +2,15 @@ import Container from "../Container"
 import Search from "./Search"
 import { Logo } from "./Logo"
 import UserMenu from "./UserMenu"
+import { User } from "@prisma/client"
 
+interface NavbarProps{
+  currentUser?: User | null;
+}
 
-const NavBar = () => {
+const NavBar:React.FC<NavbarProps> = ({
+  currentUser,
+}) => {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">

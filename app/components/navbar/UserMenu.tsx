@@ -6,9 +6,14 @@ import MenuItem from "./MenuItem";
 
 import useRegisterModal from "@/app/hooks/useRegisterModel";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import { User } from "@prisma/client";
 
-const UserMenu = () => {
+interface UserMenuProps {
+  currentUser?: User | null;
+}
 
+
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser, }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
 
@@ -55,12 +60,26 @@ const UserMenu = () => {
                 "
         >
           <div className="flex flex-col cursor-pointer">
-            <>
+            {currentUser ? (
+               <>
+                <MenuItem onClick={()=>{}} label="Mensagens" />
+                  <MenuItem onClick={()=>{}} label="Viagens" />
+                  <MenuItem onClick={()=>{}} label="Favoritos" />
+                  <hr />
+                  <MenuItem onClick={()=>{}} label="Anucie seu espaço no Aribnb" />
+                  <MenuItem onClick={()=>{}} label="Indique um Anfitrião" />
+                  <MenuItem onClick={()=>{}} label="Conta" />
+                  <hr />
+                  <MenuItem onClick={()=>{}} label="Central de Ajudar" />
+                  <MenuItem onClick={()=>{}} label="Sair da Conta" />
+                </>
+            ):(
+              <>
               <MenuItem onClick={loginModal.onOpen} label="entrar" />
-            </>
-            <>
               <MenuItem onClick={registerModal.onOpen} label="registrar" />
             </>
+            )}
+           
           </div>
         </div>
       )}

@@ -5,6 +5,7 @@ import NavBar from "./components/navbar/NavBar";
 import RegisterModal from "./components/modals/RegisterModal";
 import LoginModal from "./components/modals/LoginModal";
 import ToastProvider from "./providers/ToastProvider";
+import getCurrentUser from "./actions/getCurrentUser";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,11 +14,12 @@ export const metadata: Metadata = {
   description: "Airbnb Clone",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser = await getCurrentUser()
   return (
     <html lang="pt-br">
       <body className={inter.className}>
@@ -25,7 +27,7 @@ export default function RootLayout({
           <ToastProvider/>
           <RegisterModal/>
           <LoginModal/>
-          <NavBar />
+          <NavBar currentUser={currentUser}/>
         </>
         {children}
       </body>
