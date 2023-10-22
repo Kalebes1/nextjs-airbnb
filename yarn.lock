@@ -24,9 +24,9 @@
     preact "10.11.3"
     preact-render-to-string "5.2.3"
 
-"@auth/prisma-adapter@^1.0.4":
+"@auth/prisma-adapter@^1.0.5":
   version "1.0.4"
-  resolved "https://registry.npmjs.org/@auth/prisma-adapter/-/prisma-adapter-1.0.4.tgz"
+  resolved "https://registry.yarnpkg.com/@auth/prisma-adapter/-/prisma-adapter-1.0.4.tgz#f65b3e9e47f40d0abdcc08e98b303a67b6e5ba66"
   integrity sha512-3Zj8mvU1sIIMZScduvLUWZk1apd7rWsNznONnwh0BJe5zdlW1al5OMpE/k7e/slRG7Hr20n6wt2z5Npdydwybw==
   dependencies:
     "@auth/core" "0.17.0"
