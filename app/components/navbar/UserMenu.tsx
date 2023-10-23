@@ -7,12 +7,13 @@ import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModel";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
 interface UserMenuProps {
   currentUser?: User | null;
 }
 
-  const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
 
@@ -21,7 +22,6 @@ interface UserMenuProps {
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
-
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
@@ -61,9 +61,11 @@ interface UserMenuProps {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem onClick={() => {}} label="Mensagens" />
-                <MenuItem onClick={() => {}} label="Viagens" />
-                <MenuItem onClick={() => {}} label="Favoritos" />
+                <div className="font-semibold">
+                  <MenuItem onClick={() => {}} label="Mensagens" />
+                  <MenuItem onClick={() => {}} label="Viagens" />
+                  <MenuItem onClick={() => {}} label="Favoritos" />
+                </div>
                 <hr />
                 <MenuItem
                   onClick={() => {}}
@@ -73,7 +75,7 @@ interface UserMenuProps {
                 <MenuItem onClick={() => {}} label="Conta" />
                 <hr />
                 <MenuItem onClick={() => {}} label="Central de Ajudar" />
-                <MenuItem onClick={() => {}} label="Sair da Conta" />
+                <MenuItem onClick={() => signOut()} label="Sair da Conta" />
               </>
             ) : (
               <>

@@ -9,7 +9,6 @@ interface NavbarProps{
   currentUser?: User | null;
 }
 const NavBar:React.FC<NavbarProps> = ({
-  //debugger;
   currentUser,
 }) => {
   return (
