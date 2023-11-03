@@ -9,6 +9,8 @@ import { categories } from "../navbar/Categories";
 import CategoryInput from "../inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
+import dynamic from "next/dynamic";
+import Counter from "../inputs/Counter";
 
 enum STEPS {
   CATEGORY = 0,
@@ -47,6 +49,17 @@ const RentModal = () => {
 
   const category = watch("category");
   const location = watch("location");
+  const guestCount = watch('guestCount');
+  const roomCount = watch('roomCount');
+  const bathroomCount = watch('bathroomCount');
+
+  const Map = useMemo(
+    () =>
+      dynamic(() => import("../Map"), {
+        ssr: false,
+      }),
+    [location]
+  );
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -68,14 +81,14 @@ const RentModal = () => {
     if (step === STEPS.PRICE) {
       return "Create";
     }
-    return "Next";
+    return "Próximo";
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
     if (step === STEPS.CATEGORY) {
       return undefined;
     }
-    return "Back";
+    return "Voltar";
   }, [step]);
 
   let bodyContent = (
@@ -99,7 +112,7 @@ const RentModal = () => {
     </div>
   );
 
-  if(step === STEPS.LOCATION){
+  if (step === STEPS.LOCATION) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
@@ -108,11 +121,46 @@ const RentModal = () => {
         />
         <CountrySelect
           value={location}
-          onChange={(value)=>setCustomValue('location', value)}
+          onChange={(value) => setCustomValue("location", value)}
         />
+        <Map center={location?.latlng} />
       </div>
-    )
+    );
   }
+
+if (step === STEPS.INFO){
+  bodyContent = (
+    <div className="flex flex-col gap-8">
+
+
+      <Heading
+        title="Compartilhe informações básicas sobre sua residência"
+        subtitle="Que comodidades você possui?"
+      />
+      <Counter
+        title="Convidados"
+        subtitle="Quantos convidados seu imóvel suporta?"
+        value={guestCount}
+        onChange={(value) => setCustomValue('guestCount', value)}
+      />
+      <hr />
+      <Counter
+        title="Quartos"
+        subtitle="Quantos quartos seu imóvel possui?"
+        value={roomCount}
+        onChange={(value) => setCustomValue('roomCount', value)}
+      />
+      <hr />
+      <Counter
+        title="Banheiros"
+        subtitle="Quantos banheiros seu imóvel possui?"
+        value={bathroomCount}
+        onChange={(value) => setCustomValue('bathroomCount', value)}
+      />
+    </div>
+  )
+    
+}
 
   return (
     <Modal
