@@ -44,9 +44,9 @@ const useFavorite = ({
 
             await request();
             router.refresh();
-            toast.success('Adicionado aos favoritos');
+            toast.success('Sucesso');
         } catch (error){
-            toast.error('something went wrong')
+            toast.error('Aconteceu algo de errado')
         }
     },[
         currentUser,
