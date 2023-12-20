@@ -1,5 +1,6 @@
 
 "use client";
+import { useRouter } from 'next/navigation'
 import { useCallback, useState } from "react";
 import { signOut } from "next-auth/react";
 
@@ -17,6 +18,7 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+  const router = useRouter();
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal()
@@ -74,7 +76,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
               <>
                 <div className="font-semibold">
                   <MenuItem onClick={() => {}} label="Mensagens" />
-                  <MenuItem onClick={() => {}} label="Viagens" />
+                  <MenuItem onClick={() => router.push("/viagens")} label="Viagens" />
                   <MenuItem onClick={() => {}} label="Favoritos" />
                 </div>
                 <hr />
